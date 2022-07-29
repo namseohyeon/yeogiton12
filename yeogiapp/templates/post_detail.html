@@ -1,0 +1,9 @@
+{{ post_detail.title }}
+{{ post_detail.body }}
+
+{% if post_detail.spacePhoto %}         
+    <img src="{{ post_detail.spacePhoto.url }}"> <br><br><br>
+{% else %}
+    <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" width="450px" height="300px" alt="..." /><br><br><br>
+{% endif %}
+<a class="btn btn-outline-dark mt-auto" href="{% url 'postdelete' post_detail.id %}">책 삭제</a>
