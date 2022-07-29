@@ -1,3 +1,4 @@
+# from turtle import update
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -30,6 +31,15 @@ class Comment(models.Model):
     comment = models.TextField()
     #날짜
     date = models.DateTimeField(auto_now_add=True)
+    # parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
     
     def __str__(self):
         return self.comment
+
+class ReComment(models.Model):
+    recomment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    body = models.CharField('대댓글', max_length=150)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.body 

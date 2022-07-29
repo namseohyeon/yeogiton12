@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comment, ReComment
 
 class PostModelForm(forms.ModelForm):
     class Meta:
@@ -39,3 +39,11 @@ class CommentModelForm(forms.ModelForm):
             'rows': 5
         }
  
+        fields = ['comment']
+
+class ReCommentForm(forms.ModelForm):
+    class Meta:
+        model = ReComment
+        fields = ['body']  
+
+        

@@ -23,12 +23,12 @@
   <div class="container">
     {{ post_detail.title }}
     {{ post_detail.body }}
-
+    {{ post_detail.date }}
     {% if post_detail.spacePhoto %}         
         <img src="{{ post_detail.spacePhoto.url }}"> <br><br><br>
     {% else %}
         <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" width="450px" height="300px" alt="..." /><br><br><br>
-    {% endif %}
+
 
     {% if user == post_detail.user %}
     <span class="text-center" style="float: right;"><a class="btn btn-outline-dark mt-auto" href="{% url 'postupdate' post_detail.id %}">수정</a></span>
@@ -46,6 +46,7 @@
     </div>
     좋아요 개수 : {{ post_detail.likeNum }}
 
+<<<<<<< Updated upstream
     <br><br><br>
     {% for comment in post_detail.comment_set.all %}
     <span class="badge rounded-pill bg-light">{{ comment.date}}</span>    
@@ -69,3 +70,44 @@
   </div>
 </body>
 </html>
+=======
+<br><br><br>
+<!-- {% for comment in post_detail.comment_set.all %}
+<span class="badge rounded-pill bg-light">{{ comment.date}}</span>    
+{{ comment }}
+<a href="{% url 'commentdelete' comment.id %}"><span class="badge rounded-pill bg-black" style="float: right;">삭제</span></a>
+<hr>
+{% endfor %} -->
+
+{% if user.is_authenticated %}
+<form method="POST" action="{% url 'commentcreate' post_detail.id  %}">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ comment_form }}
+    </div>
+    <input type="submit" class="btn btn-primary btn-icon-split btn-sm" value="댓글 입력">
+</form>
+{% endif %}
+
+
+
+{% for i in post_detail.comment_set.all %}
+    <p>{{ user.username }}: {{i}} {{ i.date }} <a href="{% url 'commentdelete' i.id %}">삭제</a></p>
+    {%for recom in i.recomment_set.all%}
+    &nbsp;&nbsp;🐾{{ user.username }}:{{recom}} {{ i.date }}<br>
+    {% endfor %}
+ 
+        <form method="post" action="{% url 'create_recomment' post_id i.id %}">
+            {%csrf_token%}
+            <!-- {% for recom_form in recomment_form %}
+                {%if recom_form.label != 'Comment' %}
+                {{recom_form.label}} : {{recom_form}}
+                {%endif%}
+            {%endfor%} -->
+            {{ recomment_form }}
+            <input type="hidden" name="comment" value={{i.id}}>
+            <input type="submit">
+        </form>
+    <hr>
+{%endfor%}
+>>>>>>> Stashed changes
