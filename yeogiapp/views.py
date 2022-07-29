@@ -48,3 +48,6 @@ def commentdelete(request, comment_id):
     post = get_object_or_404(Post, pk=comment.post.id)
     comment.delete()
     return redirect('postdetail', post.id)
+
+def Login(request):
+    return render(request,'Login.html')
