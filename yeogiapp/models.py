@@ -17,8 +17,6 @@ class Post(models.Model):
     spacePhoto = models.ImageField(blank=True, null=True, upload_to='space_photo')
     #좋아요수
     likeNum = models.IntegerField(default=0)
-    #공간 이름
-    spaceName = models.TextField()
 
     def __str__(self):
         return self.title
