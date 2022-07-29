@@ -35,3 +35,16 @@ def postdetail(request, post_id):
     comment_form = CommentModelForm()
     return render(request, 'post_detail.html', {'post_detail':post_detail, 'comment_form':comment_form})
 
+def commentcreate(request, post_id):
+    filled_form = CommentModelForm(request.POST)
+    if filled_form.is_valid():
+        finished_form = filled_form.save(commit=False)
+        finished_form.post = get_object_or_404(Post, pk=post_id)
+        finished_form.save()
+    return redirect('postdetail', post_id)
+
+def commentdelete(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    post = get_object_or_404(Post, pk=comment.post.id)
+    comment.delete()
+    return redirect('postdetail', post.id)
