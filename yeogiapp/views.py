@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.urls import is_valid_path
 from .models import Post, Comment
-from .forms import PostModelForm, CommentModelForm
+from .forms import PostModelForm, CommentModelForm, ReCommentForm
 from django.core.paginator import Paginator
 from django.db.models import Count
 
@@ -48,7 +49,9 @@ def postupdate(request, post_id):
 def postdetail(request, post_id):
     post_detail = get_object_or_404(Post, pk=post_id)
     comment_form = CommentModelForm()
-    return render(request, 'post_detail.html', {'post_detail':post_detail, 'comment_form':comment_form})
+    recomment_form = ReCommentForm()
+    return render(request, 'post_detail.html', {'post_detail':post_detail, 'comment_form':comment_form,
+    'post_id':post_id, 'recomment_form':recomment_form,})
 
 def postlike(request, post_id):
     if request.user.is_authenticated:
@@ -92,3 +95,14 @@ def commentupdate(request, comment_id):
     else:
         form = CommentModelForm(instance=comment)
         return render(request, 'comment_update.html', {'post_detail' : post, 'comment_detail' : comment, 'form' : form})
+
+
+def create_recomment(requset, post_id, comment_id):
+    filled_form = ReCommentForm(requset.POST)
+    if filled_form.is_valid():
+        finished_form = filled_form.save(commit=False)
+        # finished_form.recomment = get_object_or_404(Post, pk=post_id)
+        finished_form.recomment = get_object_or_404(Comment, pk=comment_id)
+        finished_form.save()
+    return redirect('postdetail', post_id)
+
