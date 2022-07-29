@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review</title>
+    <link rel="stylesheet" href="{%static './css/review.css' %}">
+</head>
+<body>
+    <div class="review" style="border: solid 4px #FFC700;">
+        <div class="review-top">
+            <div class="writer-profile">
+                <img src="{%static './image/user.png' %}">
+            </div>
+            <div class="review-user">
+                <div class="review-user-id">userID</div>
+                <div class="review-date">20XX.XX.XX</div>
+            </div>
+            <button class="review-bin-button" type="button">
+                <img src="{%static './image/bin.png' %}" width="25vh" height="25vh">
+            </button>
+        </div>
+        <div class="review-title">제목</div>
+        <div class="review-content">후기 내용 후기 내용 후기 내용</div>
+        <img width="100%" height="70%" src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDEwMTRfMTg0%2FMDAxNjAyNjgzMTgxNTQ3.qcbTkNfzFY75fzTRZsyJo7OwWJVpx_uv3Lf1hXmlI6Eg.5VSSIqaB14PUuzKhlUAWB5fh5XfUkAcUSXbRnZv7nbog.JPEG.jeeyha%2FDSC04161.JPG" alt="이미지">
+        <div class="review-under">
+            <img src="{%static './image/star.png' %}">
+            <div class="star-count">35</div>
+            <img src="{%static './image/chat.png' %}">
+            <div class="chat-count">2</div>
+        </div>
+        <hr clas="review-line" style="border: solid 2px #FFC700;">
+        <div class="review-comment">
+            <div class="review-comment-content">
+                댓글을 남겨주세요.
+            </div>
+            <button class="review-send-button" type="button">
+                <img src="{%static './image/review_send.png' %}">
+            </button>
+        </div>
+    </div>
+</body>
+</html>
