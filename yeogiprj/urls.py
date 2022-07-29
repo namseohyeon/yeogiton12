@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
+import account.views
 from yeogiapp import views
 from django.conf.urls.static import static
 
@@ -28,4 +29,7 @@ urlpatterns = [
 
     path('commentcreate/<int:post_id>', views.commentcreate, name='commentcreate'),
     path('commentdelete/<int:comment_id>', views.commentdelete, name='commentdelete'),
+    path('account/login', account.views.login_view, name="login"),
+    path('account/logout', account.views.logout_view, name="logout"),
+    path('account/signup', account.views.signup_view, name='signup'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
