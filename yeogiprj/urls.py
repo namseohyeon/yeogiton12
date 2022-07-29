@@ -13,13 +13,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path
 import account.views
+from yeogiapp import views
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    path('postcreate/', views.postcreate, name='postcreate'),
+    path('postdelete/<int:post_id>', views.postdelete, name='postdelete'),
+    path('postdetail/<int:post_id>', views.postdetail, name='postdetail'),
+
+    path('commentcreate/<int:post_id>', views.commentcreate, name='commentcreate'),
+    path('commentdelete/<int:comment_id>', views.commentdelete, name='commentdelete'),
     path('account/login', account.views.login_view, name="login"),
     path('account/logout', account.views.logout_view, name="logout"),
     path('account/signup', account.views.signup_view, name='signup'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
