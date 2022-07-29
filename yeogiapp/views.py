@@ -33,6 +33,18 @@ def postdelete(request, post_id):
     post.delete()
     return redirect('home')
 
+def postupdate(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    if (request.method == 'POST' or request.method == 'FILES'):
+        form = PostModelForm(request.POST, request.FILES, instance=post)
+        if (form.is_valid()):
+            form.save()
+        return redirect('home')
+
+    else:
+        form = PostModelForm(instance=post)
+        return render(request, 'post_update.html', {'form' : form, 'post_detail' : post})
+
 def postdetail(request, post_id):
     post_detail = get_object_or_404(Post, pk=post_id)
     comment_form = CommentModelForm()
@@ -68,3 +80,15 @@ def commentdelete(request, comment_id):
     post = get_object_or_404(Post, pk=comment.post.id)
     comment.delete()
     return redirect('postdetail', post.id)
+
+def commentupdate(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    post = get_object_or_404(Post, pk=comment.post.id)
+    if (request.method == 'POST'):
+        form = CommentModelForm(request.POST, instance=comment)
+        if (form.is_valid()):
+            form.save()    
+        return redirect('postdetail', post.id)
+    else:
+        form = CommentModelForm(instance=comment)
+        return render(request, 'comment_update.html', {'post_detail' : post, 'comment_detail' : comment, 'form' : form})
