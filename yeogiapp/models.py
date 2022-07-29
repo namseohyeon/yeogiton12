@@ -1,7 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Post(models.Model):
+    #사용자
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default = '')
+    #좋아하는 사용자
+    like_users = models.ManyToManyField(User, related_name='like_posts')
     #제목
     title = models.CharField(max_length=200)
     #본문
@@ -19,6 +24,8 @@ class Post(models.Model):
         return self.title
 
 class Comment(models.Model):
+    #사용자
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default = '')
     #게시글
     post = models.ForeignKey(Post, null=True, blank=True, on_delete=models.CASCADE)
     #댓글 내용

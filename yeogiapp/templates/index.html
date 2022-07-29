@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <body>
+    {% if user.is_authenticated %}
     <a class="btn btn-outline-dark mt-auto" href="{% url 'postcreate' %}">게시물 추가</a><br>
+    {% endif %}
     <hr>
     {% for post in posts %}
         <a href="{% url 'postdetail' post.id %}">
