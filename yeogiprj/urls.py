@@ -34,5 +34,5 @@ urlpatterns = [
     path('account/login', account.views.login_view, name="login"),
     path('account/logout', account.views.logout_view, name="logout"),
     path('account/signup', account.views.signup_view, name='signup'),
-    path('Login/', views.Login, name='Login'),
+    #path('Login/', views.Login, name='Login'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
