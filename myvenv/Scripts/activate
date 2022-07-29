@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Work\yeogiton12\myvenv"
+VIRTUAL_ENV="C:\Users\won\Documents\2022-1\likelion\yeogiton12\myvenv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
